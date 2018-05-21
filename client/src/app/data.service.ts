@@ -66,7 +66,7 @@ export class DataService {
           .catch(this.errorHandler);
     return this.res;
   }
-  getUserMenu():Observable<any>{
+  getUserMenu(data:any):Observable<any>{
     
     // let headers = new Headers({'Content-Type': 'application/json'});
     // let opt = { responseType: 'text' as 'text' };
@@ -76,7 +76,14 @@ export class DataService {
       // return  this.http.get<any>(this.fullurl)
       // .map((result: Response) => result)
       // .catch(this.errorHandler);
-    return  this.http.get(this.fullurl+'?filter[where][username]='+localStorage.getItem('token'))
+    return  this.http.get(this.fullurl+'?filter[where][username]='+data)
+    .map((result: Response) => result)
+    .catch(this.errorHandler);
+  }
+  deleteUserMenu(id:any):Observable<any>{
+    this.fullurl = '';
+    this.fullurl = this.global.weburl + '/userMenus/'+id;
+    return  this.http.delete(this.fullurl)
     .map((result: Response) => result)
     .catch(this.errorHandler);
   }
@@ -86,7 +93,7 @@ export class DataService {
 
    
 
-    this.getUserMenu()
+    this.getUserMenu(localStorage.getItem('token'))
       .subscribe(data =>{
         menuList = data;
         menuList.forEach(element => {

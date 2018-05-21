@@ -37,7 +37,7 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getUserMenu()
+    this.dataService.getUserMenu(localStorage.getItem('token'))
       .subscribe(data =>{
         console.log(data)
         data.forEach(element => {

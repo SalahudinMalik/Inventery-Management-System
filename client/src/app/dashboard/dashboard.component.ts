@@ -24,6 +24,9 @@ export class DashboardComponent implements OnInit {
 
   userList: User[] = [];
   menuList: Menu [] =[];
+  menuUList:any[]=[];
+  menuSUList:any[]=[];
+  deleteRes:any;
   selectedMenu: any[]=[0,1,0,1,0,1];
   selectedUser: string = "Select User";
   selectedUserCode: any = '';
@@ -41,19 +44,18 @@ export class DashboardComponent implements OnInit {
         .subscribe(data => {
           this.userList = data;
       });
-     this.dataService.getUserMenu()
+     this.dataService.getUserMenu(localStorage.getItem('token'))
       .subscribe(data =>{
         this.menuToShow = data;
 
       });
       console.log('nav res : '+this.dataService.isNav('100'));
-      let menuList:any[]=[];
+     
       let isnav:boolean = false;
-      this.dataService.getUserMenu()
+      this.dataService.getUserMenu(localStorage.getItem('token'))
         .subscribe(data =>{
-          menuList = data;
-          console.log('menuList : '+menuList);
-          menuList.forEach(element => {
+          this.menuUList = data;
+          this.menuUList.forEach(element => {
             console.log('nav service menu : '+ element.menuId);
             if(element.menuId == '100'){
               console.log('nav service menu id : '+ element.menuId);
@@ -94,6 +96,15 @@ export class DashboardComponent implements OnInit {
       return;
     }
     let dataToSave:any;
+    
+    this.menuUList.forEach(element => {
+      console.log("delete: "+ element.id);
+      this.dataService.deleteUserMenu(element.id)
+        .subscribe(data =>{
+          this.deleteRes = data
+          console.log("swlwtw log "+this.deleteRes);
+        });
+    });
     //plots = this.selection.selected;
     this.menuList.forEach(element => {
       if(element.checked){
@@ -112,7 +123,10 @@ export class DashboardComponent implements OnInit {
   } 
    userChange(newuser: User) { 
     this.selectedUser = newuser.username;
-    console.log(newuser);
+    this.dataService.getUserMenu(this.selectedUser)
+      .subscribe(data =>{
+        this.menuSUList = data;
+      })
   
   }
 

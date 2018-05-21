@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit{
       this.hits = 0;
 
     }
-     let navStr:string;
+     let navStr:string = '';
     this.ngProgress.start();
     // this.router.navigateByUrl("/dashboard");
     // this.authService.setToken("malik"); 
@@ -67,11 +67,12 @@ export class LoginComponent implements OnInit{
             this.authService.setToken(this.userName); 
             this.ngProgress.done();
            
-            this.dataService.getUserMenu()
+            this.dataService.getUserMenu(localStorage.getItem('token'))
               .subscribe(userMenu =>{
                 userMenu.forEach(element => {
-                  navStr = this.nav(element.menuId);
-                  if(navStr != ''){
+                 
+                  if(navStr == ''){
+                    navStr = this.nav(element.menuId);
                     this.router.navigateByUrl(navStr);
                     
                   }

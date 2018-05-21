@@ -17,7 +17,7 @@ export class ShopComponent implements OnInit {
   ngOnInit() {
     let menuList:any[]=[];
     let isnav:boolean = false;
-    this.dataService.getUserMenu()
+    this.dataService.getUserMenu(localStorage.getItem('token'))
       .subscribe(data =>{
         menuList = data;
         console.log('menuList : '+menuList);

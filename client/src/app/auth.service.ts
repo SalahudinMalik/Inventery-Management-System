@@ -67,7 +67,7 @@ export class AuthService {
   }
   public isNavigate(): boolean{
     
-      this.dataService.getUserMenu()
+      this.dataService.getUserMenu(localStorage.getItem('token'))
       .subscribe(data =>{
         data.forEach(element => {
           console.log( "AUTH GUARD : "+element.menuId);
