@@ -13,7 +13,14 @@ const routes: Routes = [
     data: {
       title: 'Login'
     }
-  }
+  },
+   {
+          path: '404',
+          component: P404Component,
+          data: {
+            title: 'Page 404'
+          }
+   }
   // {
   //   path: '',
   //   data: {

@@ -45,7 +45,6 @@ export class FullLayoutComponent implements OnInit {
           switch(element.menuId){
             case '100':
               this.dashboard = true;
-              console.log(this.dashboard);
               break;
             
             case '101':

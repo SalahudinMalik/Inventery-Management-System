@@ -80,7 +80,30 @@ export class DataService {
     .map((result: Response) => result)
     .catch(this.errorHandler);
   }
+  isNav(menuId:string):boolean{
+    let menuList:any[]=[];
+    let isnav:boolean = false;
 
+   
+
+    this.getUserMenu()
+      .subscribe(data =>{
+        menuList = data;
+        menuList.forEach(element => {
+          console.log('nav service menu : '+ element.menuId);
+          if(element.menuId == menuId){
+            console.log('nav service menu id : '+ element.menuId);
+            return true;
+          
+          }
+        });
+    });
+
+    
+    
+    
+    return isnav;
+  }
   getAllPlots():Observable<any>{
     this.fullurl = this.global.weburl + 'plotD/plots' ;
     // this.fullurl = this.global.weburl + "auth/login";
