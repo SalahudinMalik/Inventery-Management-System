@@ -1,0 +1,22 @@
+{
+  "name": "menubar",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "menuId": {
+      "type": "string",
+      "required": true
+    },
+    "menuName": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

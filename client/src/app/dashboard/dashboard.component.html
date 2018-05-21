@@ -1,0 +1,36 @@
+<ng-progress [positionUsing]="'translate3d'" [minimum]="0.10" [maximum]="1"
+[speed]="100" [showSpinner]="true" [direction]="'leftToRightIncreased'"
+[color]="'#20a8d8'" [trickleSpeed]="120" [thick]="false" [ease]="'linear'"
+></ng-progress>
+<div class="animated fadeIn">
+  
+  <p>dashboard will be here...</p>
+  <div class="row">
+    <div class="col">
+        <div ngbDropdown class="d-inline-block col-sm-12">
+          <button class="btn btn-outline-primary" id="sortMenu" ngbDropdownToggle>{{selectedUser}}</button>
+          <div id = "list" class="dropdown-menu scrollable-menu" aria-labelledby="sortMenu">
+            <button  class="dropdown-item" *ngFor="let user of userList" (click)="userChange(user)" >{{user.username}}</button>
+          </div>
+        </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="options">Menu:</label>
+        <div *ngFor="let menu of menuList">
+            <label>
+                <input type="checkbox"
+                       name="options"
+                       value="{{menu.menuName}}"
+                       [(ngModel)]="menu.checked"/>
+                {{menu.menuName}}
+            </label>
+        </div>
+       </div>
+    </div>
+    <div class="panel panel-default mt-2" style="float:right">
+      <button class="btn btn-primary" type="button" (click)="saveData()">Save</button>
+    </div>
+  </div>
+</div>
+  
