@@ -46,5 +46,9 @@
   "userMenu": {
     "dataSource": "db",
     "public": true
+  },
+  "customer": {
+    "dataSource": "db",
+    "public": true
   }
 }
