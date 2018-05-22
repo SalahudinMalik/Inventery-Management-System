@@ -70,17 +70,6 @@ export class RolesGuard implements CanActivate {
       //     // });
        
        
-      // // }
-      // console.log('status : '+status);
-      // return status;
-      // if(!status){
-      //  console.log(status);
-
-      //  // this.router.navigate(['/pages/404']);
-      // }
-      // else{
-      //   return true;
-      // }
-    
+     
   }
 }
