@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Globals } from '../Globals';
 import { HttpClient, HttpHeaders  ,HttpErrorResponse } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/throw';
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/toPromise";
+import "rxjs/add/operator/catch";
+import "rxjs/Rx";
 
 
 import {Plot} from './models/plot.model';
@@ -67,7 +68,7 @@ export class DataService {
     return this.res;
   }
   getUserMenu(data:any):Observable<any>{
-    
+    this.fullurl = ''
     // let headers = new Headers({'Content-Type': 'application/json'});
     // let opt = { responseType: 'text' as 'text' };
      this.fullurl = this.global.weburl + '/userMenus';
@@ -87,30 +88,45 @@ export class DataService {
     .map((result: Response) => result)
     .catch(this.errorHandler);
   }
-  isNav(menuId:string):boolean{
+  menulistToNav():any[]{
     let menuList:any[]=[];
-    let isnav:boolean = false;
+    //let isnav:boolean = false;
 
    
 
     this.getUserMenu(localStorage.getItem('token'))
       .subscribe(data =>{
         menuList = data;
-        menuList.forEach(element => {
-          console.log('nav service menu : '+ element.menuId);
-          if(element.menuId == menuId){
-            console.log('nav service menu id : '+ element.menuId);
-            return true;
-          
-          }
-        });
+
     });
 
     
     
     
-    return isnav;
+    return menuList;
   }
+  async getUserMenuList():Promise<any> {
+    this.fullurl = ''
+    // let headers = new Headers({'Content-Type': 'application/json'});
+    // let opt = { responseType: 'text' as 'text' };
+     this.fullurl = this.global.weburl + '/userMenus';
+     const response = await this.http.get(this.fullurl+'?filter[where][username]='+localStorage.getItem('token')).toPromise();
+     return response;
+     // return new Promise((resolve, reject) => {
+    //   this.http
+    //     .get(this.fullurl+'?filter[where][username]='+localStorage.getItem('token'))
+    //     .map(res => res)
+    //     .subscribe(
+    //       data => {
+    //         resolve(data);
+    //       },
+    //       error => {
+    //         reject(error);
+    //       }
+    //     );
+    // });
+  }
+ 
   getAllPlots():Observable<any>{
     this.fullurl = this.global.weburl + 'plotD/plots' ;
     // this.fullurl = this.global.weburl + "auth/login";

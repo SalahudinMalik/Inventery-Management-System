@@ -8,12 +8,14 @@ import { PurchasesComponent } from './purchases/purchases.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ShopComponent } from './shop/shop.component';
+import { RolesGuard } from '../roles.guard';
 
 @NgModule({
   imports: [
     CommonModule,
     SetupRoutingModule
   ],
-  declarations: [ SalesComponent, PurchasesComponent, InvoiceComponent, ReportsComponent, ShopComponent ]
+  declarations: [ SalesComponent, PurchasesComponent, InvoiceComponent, ReportsComponent, ShopComponent ],
+  providers: [RolesGuard]
 })
 export class SetupModule { }

@@ -5,7 +5,7 @@ import { PurchasesComponent } from './purchases/purchases.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ShopComponent } from './shop/shop.component';
- import {AuthGuard} from '../auth.guard';
+ import {RolesGuard} from '../roles.guard';
 
 
 const routes: Routes = [
@@ -16,43 +16,50 @@ const routes: Routes = [
     },
     children: [
       {
-        canActivate : [AuthGuard],
+        canActivate : [RolesGuard],
         path: 'purchases',
         component: PurchasesComponent,
         data: {
-          title: 'Purchases'
+          title: 'Purchases',
+          code: '103'
         }
       },
       {
-        canActivate : [AuthGuard],
+        canActivate : [RolesGuard],
         path: 'invoice',
         component: InvoiceComponent,
         data: {
-          title: 'Invoice'
+          title: 'Invoice',
+          code : '104'
         }
       },
       {
-        canActivate : [AuthGuard],
+        canActivate : [RolesGuard],
         path: 'sales',
         component: SalesComponent,
         data: {
-          title: 'Sales'
+          title: 'Sales',
+          code : '101'
         }
       },
       {
-        canActivate : [AuthGuard],
+        canActivate : [RolesGuard],
         path: 'shop',
         component: ShopComponent,
         data: {
-          title: 'Shop'
+          title: 'Shop',
+          code : '106'
         }
       },
       {
-        canActivate : [AuthGuard],
+        canActivate : [RolesGuard],
         path: 'report',
         component: ReportsComponent,
         data: {
-          title: 'Report'
+          title: 'Report',
+          code : '105'
+
+
         }
       }
       

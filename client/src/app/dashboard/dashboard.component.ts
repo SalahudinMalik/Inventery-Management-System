@@ -49,8 +49,7 @@ export class DashboardComponent implements OnInit {
         this.menuToShow = data;
 
       });
-      console.log('nav res : '+this.dataService.isNav('100'));
-     
+      
       let isnav:boolean = false;
       this.dataService.getUserMenu(localStorage.getItem('token'))
         .subscribe(data =>{

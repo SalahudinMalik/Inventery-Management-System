@@ -21,26 +21,28 @@ export class ReportsComponent implements OnInit {
     // if(!this.dataService.isNav('105')){
     //   this.router.navigateByUrl("/pages/404");
     // }
-    let menuList:any[]=[];
-    let isnav:boolean = false;
-    this.dataService.getUserMenu(localStorage.getItem('token'))
-      .subscribe(data =>{
-        menuList = data;
-        console.log('menuList : '+menuList);
-        menuList.forEach(element => {
-          console.log('nav service menu : '+ element.menuId);
-          if(element.menuId == '105'){
-            console.log('nav service menu id : '+ element.menuId);
-            isnav = true;
+
+    
+    // let menuList:any[]=[];
+    // let isnav:boolean = false;
+    // this.dataService.getUserMenu(localStorage.getItem('token'))
+    //   .subscribe(data =>{
+    //     menuList = data;
+    //     console.log('menuList : '+menuList);
+    //     menuList.forEach(element => {
+    //       console.log('nav service menu : '+ element.menuId);
+    //       if(element.menuId == '105'){
+    //         console.log('nav service menu id : '+ element.menuId);
+    //         isnav = true;
           
-          }
-        }
-      );
-      if(!isnav){
-        //console.log('nav res : '+this.dataService.isNav('105'));
-         this.router.navigateByUrl("/pages/404");
-      }
-    });
+    //       }
+    //     }
+    //   );
+    //   if(!isnav){
+    //     //console.log('nav res : '+this.dataService.isNav('105'));
+    //      this.router.navigateByUrl("/pages/404");
+    //   }
+    // });
    
   }
 
