@@ -6,7 +6,7 @@ To install just hit
     cd client 
     npm install
 To run 
-    first install mongodb on your local machine 
+    first install mongodb on your local machine \n
     to run nodejs server just hit node ./ 
     for angular go to client and hit npm start
 
