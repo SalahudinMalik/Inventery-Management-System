@@ -58,16 +58,7 @@ export class RolesGuard implements CanActivate {
       //     })
       
             
-      //       // codes = data['menuId'];
-            
-           
-         
-      //     // codes.forEach(element => {
-         
-      //     //   if(element == code){
-      //     //     return true;
-      //     //   }
-      //     // });
+     
        
        
      
