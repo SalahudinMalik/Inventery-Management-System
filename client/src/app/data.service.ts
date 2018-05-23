@@ -73,14 +73,8 @@ export class DataService {
   }
   getUserMenu(data:any):Observable<any>{
     this.fullurl = ''
-    // let headers = new Headers({'Content-Type': 'application/json'});
-    // let opt = { responseType: 'text' as 'text' };
+   
      this.fullurl = this.global.weburl + '/userMenus'+'?access_token='+ this.token;
-    // this.fullurl = this.global.weburl + "auth/login";
-    
-      // return  this.http.get<any>(this.fullurl)
-      // .map((result: Response) => result)
-      // .catch(this.errorHandler);
     return  this.http.get(this.fullurl+'&filter[where][username]='+data)
     .map((result: Response) => result)
     .catch(this.errorHandler);
