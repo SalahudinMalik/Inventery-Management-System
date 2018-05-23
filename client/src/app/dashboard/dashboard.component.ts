@@ -50,26 +50,7 @@ export class DashboardComponent implements OnInit {
 
       });
       
-      let isnav:boolean = false;
-      this.dataService.getUserMenu(localStorage.getItem('token'))
-        .subscribe(data =>{
-          this.menuUList = data;
-          this.menuUList.forEach(element => {
-            console.log('nav service menu : '+ element.menuId);
-            if(element.menuId == '100'){
-              console.log('nav service menu id : '+ element.menuId);
-              isnav = true;
-            
-            }
-          }
-        );
-        if(!isnav){
-          //console.log('nav res : '+this.dataService.isNav('105'));
-           this.router.navigateByUrl("/pages/404");
-        }
-      });
-
-
+    
      this.dataService.getAllMenu()
         .subscribe(data =>{
           console.log(data);

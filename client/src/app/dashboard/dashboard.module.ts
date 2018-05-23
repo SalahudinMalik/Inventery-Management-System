@@ -9,6 +9,7 @@ import { NgProgressModule } from 'ngx-progressbar';
 import { ChartJSComponent } from './chartjs.component';
 import { FormsModule } from '@angular/forms';
 import { P500Component } from '../pages/500.component';
+import { RolesGuard } from '../roles.guard';
 @NgModule({
   imports: [CommonModule,NgbModule,
     DashboardRoutingModule,
@@ -17,6 +18,6 @@ import { P500Component } from '../pages/500.component';
     FormsModule
   ],
   declarations: [ DashboardComponent ,ChartJSComponent , P500Component],
-  providers : [DataService]
+  providers : [DataService, RolesGuard]
 })
 export class DashboardModule { }

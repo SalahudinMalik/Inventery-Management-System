@@ -3,13 +3,16 @@ import { Routes,RouterModule } from '@angular/router';
 import {AuthGuard} from '../auth.guard';
 import { DashboardComponent } from './dashboard.component';
 import { P500Component } from '../pages/500.component';
+import {RolesGuard} from '../roles.guard';
+
 const routes: Routes = [
   {
-    // canActivate : [AuthGuard],
+    canActivate : [RolesGuard],
     path: '',
     component: DashboardComponent,
     data: {
-      title: 'Dashboard'
+      title: 'Dashboard',
+      code: '100'
     }
   }
 ];

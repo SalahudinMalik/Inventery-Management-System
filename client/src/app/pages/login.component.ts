@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit{
          // if(!this.res.includes("Error")) {
          if(this.res.id != '') {
             console.log("Success :" + this.res.id)
-            this.authService.setToken('admin');
+            this.authService.setToken('zaid');
             this.authService.setUserToken(this.res.id);
             
            
