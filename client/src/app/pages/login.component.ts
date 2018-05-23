@@ -57,15 +57,17 @@ export class LoginComponent implements OnInit{
       this.authService.getLogin(this.userName , this.userPass)
         .subscribe(data => {
           this.res = data;
-          console.log(this.res);
+          console.log("response : "+this.res);
           //console.log("Sub : " +data);
           
          // if(data == '1'){
          // if(!this.res.includes("Error")) {
-         if(this.res[0].password == this.userPass) {
-            console.log("Success :" + this.res)
-            this.authService.setToken(this.userName); 
-            this.ngProgress.done();
+         if(this.res.id != '') {
+            console.log("Success :" + this.res.id)
+            this.authService.setToken('admin');
+            this.authService.setUserToken(this.res.id);
+            
+           
            
             this.dataService.getUserMenu(localStorage.getItem('token'))
               .subscribe(userMenu =>{
@@ -73,14 +75,16 @@ export class LoginComponent implements OnInit{
                  
                   if(navStr == ''){
                     navStr = this.nav(element.menuId);
+                    this.ngProgress.done();
+                    this.toastr.success('Successfully ', 'Login');
                     this.router.navigateByUrl(navStr);
-                    
+                   
                   }
                   
                  
                 });
               });
-              this.toastr.success('Successfully ', 'Login');
+             
            
           }
           else {

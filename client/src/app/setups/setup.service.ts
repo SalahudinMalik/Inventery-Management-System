@@ -14,15 +14,18 @@ import { Customer } from '../models/customer.model';
 export class SetupService {
 
   fullurl:any = '';
+  token:string;
   private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   constructor(
     private global:Globals ,
     private http: HttpClient
 
-  ) { }
+  ) {
+    this.token = localStorage.getItem('userToken');
+   }
   getAllCustomer():Observable<Customer[]>{
     this.fullurl = ''
-    this.fullurl = this.global.weburl + '/customers' ;
+    this.fullurl = this.global.weburl + '/customers'+'?access_token='+ this.token ;
     // this.fullurl = this.global.weburl + "auth/login";
     return  this.http.get(this.fullurl)
       .map((result: Response) => result)

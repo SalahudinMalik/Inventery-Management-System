@@ -17,12 +17,54 @@ export class ReportsComponent implements OnInit {
     private datePipe: DatePipe 
   ) { }
   settings = {
+    selectMode: 'multi',
     columns: {
       cName: {
         title: 'Name'
       },
       balance: {
-        title: 'Balance'
+        title: 'Balance',
+        filterFunction(cell?: any, search?: string): boolean {          
+          let first = search.charAt(0);
+          if(first == '>'){
+            search = search.replace('>' , '');
+            if (cell >= search || search === '') {
+              return true;
+            } else {
+              return false;
+            }  
+          }
+          else if(first == '<'){
+            search = search.replace('<' , '');
+            if (cell <= search || search === '') {
+              return true;
+            } else {
+              return false;
+            }  
+          }
+          else if(first == '='){
+            search = search.replace('=' , '');
+            if (cell == search || search === '') {
+              return true;
+            } else {
+              return false;
+            }  
+          }
+          else{
+            return true;
+          }     
+        }
+        // filter: {
+        //   type: 'list',
+        //   config: {
+        //     selectText: 'Select...',
+        //     list: [
+        //       { value: 'Glenna Reichert', title: 'Glenna Reichert' },
+        //       { value: 'Kurtis Weissnat', title: 'Kurtis Weissnat' },
+        //       { value: 'Chelsey Dietrich', title: 'Chelsey Dietrich' }
+        //     ]
+        //   }
+        // }
       },
       dateOfBirth: {
         title: 'Date Of Birth',
@@ -31,6 +73,12 @@ export class ReportsComponent implements OnInit {
   
           let formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
           return formatted; 
+        },
+         filter: {
+          type: 'date',
+          config: {
+           
+          }
         }
       },
       cType: {

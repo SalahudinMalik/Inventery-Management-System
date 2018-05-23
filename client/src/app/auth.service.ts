@@ -18,18 +18,25 @@ export class AuthService {
     private http: HttpClient,
     private dataService:DataService
   ) { }
+  setUserToken(token:string):void{
+    localStorage.setItem('userToken' , token);
+  }
+  getUserToken():string{
+    return localStorage.getItem('userToken');
+  }
   getLogin(username:string,password:string):Observable<any>{
     this.fullurl = '';
-    let jsonObj = JSON.stringify({username , password});
+    let jsonObj = JSON.stringify({email:username , password:password});
+   // console.log("obj : "+jsonObj)
     // let headers = new Headers({'Content-Type': 'application/json'});
     // let opt = { responseType: 'text' as 'text' };
-     this.fullurl = this.global.weburl + '/appUsers';
+     this.fullurl = this.global.weburl + '/Users/login';
     // this.fullurl = this.global.weburl + "auth/login";
     
       // return  this.http.get<any>(this.fullurl)
       // .map((result: Response) => result)
       // .catch(this.errorHandler);
-    return  this.http.get(this.fullurl+'?filter[where][username]='+username)
+    return  this.http.post(this.fullurl, jsonObj , this._options)
     .map((result: Response) => result)
     .catch(this.errorHandler);
      

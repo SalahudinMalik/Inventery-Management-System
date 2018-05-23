@@ -21,12 +21,15 @@ export class DataService {
   fullurl:any = '';
   res:any;
   dataObj:any;
+  token:string;
   private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   constructor(
     private global:Globals ,
     private http: HttpClient
 
-  ) { }
+  ) {
+    this.token = localStorage.getItem('userToken');
+   }
   //(res) => this.extractData(res)
   getAllAgent():Observable<Agent[]>{
     this.fullurl = this.global.weburl + 'agent/getAgent' ;
@@ -37,7 +40,8 @@ export class DataService {
      
   }
   getAllUser():Observable<User[]>{
-    this.fullurl = this.global.weburl + '/appUsers' ;
+    
+    this.fullurl = this.global.weburl + '/appUsers'+'?access_token='+ this.token;
     // this.fullurl = this.global.weburl + "auth/login";
       return  this.http.get(this.fullurl)
       .map((result: Response) => result)
@@ -45,7 +49,7 @@ export class DataService {
      
   }
   getAllMenu():Observable<Menu[]>{
-    this.fullurl = this.global.weburl + '/menubars' ;
+    this.fullurl = this.global.weburl + '/menubars'+'?access_token='+ this.token;
     // this.fullurl = this.global.weburl + "auth/login";
       return  this.http.get(this.fullurl)
       .map((result: Response) => result)
@@ -60,7 +64,7 @@ export class DataService {
     return this.res;
   }
   saveMenuData(data:any , selectedUser:string ): Observable<any> {
-    this.fullurl = this.global.weburl + '/userMenus';
+    this.fullurl = this.global.weburl + '/userMenus'+'?access_token='+ this.token;
    
       this.res = this.http.post<any>(this.fullurl, data  , this._options)
           .map((result: Response) => result)
@@ -71,19 +75,19 @@ export class DataService {
     this.fullurl = ''
     // let headers = new Headers({'Content-Type': 'application/json'});
     // let opt = { responseType: 'text' as 'text' };
-     this.fullurl = this.global.weburl + '/userMenus';
+     this.fullurl = this.global.weburl + '/userMenus'+'?access_token='+ this.token;
     // this.fullurl = this.global.weburl + "auth/login";
     
       // return  this.http.get<any>(this.fullurl)
       // .map((result: Response) => result)
       // .catch(this.errorHandler);
-    return  this.http.get(this.fullurl+'?filter[where][username]='+data)
+    return  this.http.get(this.fullurl+'&filter[where][username]='+data)
     .map((result: Response) => result)
     .catch(this.errorHandler);
   }
   deleteUserMenu(id:any):Observable<any>{
     this.fullurl = '';
-    this.fullurl = this.global.weburl + '/userMenus/'+id;
+    this.fullurl = this.global.weburl + '/userMenus/'+id+'?access_token='+ this.token;
     return  this.http.delete(this.fullurl)
     .map((result: Response) => result)
     .catch(this.errorHandler);
@@ -105,12 +109,13 @@ export class DataService {
     
     return menuList;
   }
+  
   async getUserMenuList():Promise<any> {
     this.fullurl = ''
     // let headers = new Headers({'Content-Type': 'application/json'});
     // let opt = { responseType: 'text' as 'text' };
-     this.fullurl = this.global.weburl + '/userMenus';
-     const response = await this.http.get(this.fullurl+'?filter[where][username]='+localStorage.getItem('token')).toPromise();
+     this.fullurl = this.global.weburl + '/userMenus'+'?access_token='+ this.token;
+     const response = await this.http.get(this.fullurl+'&filter[where][username]='+localStorage.getItem('token')).toPromise();
      return response;
      // return new Promise((resolve, reject) => {
     //   this.http
