@@ -1,6 +1,8 @@
 
 Angular 4 ACL App using loopback nodejs
 
+Added ACL with loopback
+
 
 To install just hit
     
